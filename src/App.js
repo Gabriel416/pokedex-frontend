@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import {
     fetchAllPokemon,
     fetchPokemonDetailsByName,
@@ -13,7 +13,7 @@ function App() {
     const [isLoading, setIsLoading] = useState(false);
 
     // fetch initial list of all pokemon only once
-    useMemo(() => {
+    useEffect(() => {
         const fetchPokemon = async () => {
             setIsLoading(true);
             const { results: pokemonList } = await fetchAllPokemon();
