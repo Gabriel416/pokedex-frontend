@@ -86,3 +86,20 @@ p {
   display: flex;
   justify-content: space-around;
 }
+
+/* smaller screen sizes stack columns */
+@media screen and (max-width: 712px) {
+  .pokedex__content {
+    flex-wrap: wrap-reverse;
+    gap: 0;
+  }
+  
+  .pokedex__search-results {
+    width: 100%;
+  }
+
+  .pokedex__details {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
