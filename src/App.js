@@ -8,6 +8,7 @@ import {
 
 function App() {
     const [pokemon, setPokemon] = useState([]);
+    const [pokemonFilteredList, setPokemonFilteredList] = useState([]);
     const [searchValue, setSearchValue] = useState('');
     const [pokemonDetails, setPokemonDetails] = useState();
     const [isLoading, setIsLoading] = useState(false);
@@ -24,12 +25,13 @@ function App() {
         fetchPokemon().finally(() => setIsLoading(false));
     }, []);
 
-    const pokemonList = useMemo(() => {
+    useEffect(() => {
         if (searchValue && pokemon.length) {
-            return pokemon.filter(({ name }) => name.includes(searchValue.toLowerCase()));
+            setPokemonFilteredList(pokemon.filter(({ name }) => name.includes(searchValue.toLowerCase())));
+            return;
         }
 
-        return pokemon;
+        setPokemonFilteredList(pokemon);
     }, [searchValue, pokemon]);
 
     const onSearchValueChange = (event) => {
@@ -123,9 +125,9 @@ function App() {
                 <input value={searchValue} onChange={onSearchValueChange} placeholder={'Search Pokemon'} />
             </div>
             <div className={'pokedex__content'}>
-                {pokemonList.length > 0 ? (
+                {pokemonFilteredList.length > 0 ? (
                     <div className={'pokedex__search-results'}>
-                        {pokemonList.map((monster) => {
+                        {pokemonFilteredList.map((monster) => {
                             return (
                                 <div className={'pokedex__list-item'} key={monster.name}>
                                     <div>{monster.name}</div>
