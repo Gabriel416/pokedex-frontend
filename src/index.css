@@ -80,6 +80,7 @@ p {
 .pokedex__types-moves-list-container {
   max-height: 100px;
   overflow-y: auto;
+  text-align: left;
 }
 
 .pokedex__evolution-list {
